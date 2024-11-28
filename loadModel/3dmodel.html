@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <title>Load Model 3D</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+  <style>
+    /* Khung chứa model 3D */
+    #modelContainer {
+        height: 100vh; /* Chiều cao chiếm toàn màn hình */
+        display: flex;
+        justify-content: center; /* Căn giữa ngang hình 3D */
+        align-items: center; /* Căn giữa dọc hình 3D */
+        overflow: hidden; /* Loại bỏ phần dư thừa nếu có */
+      }
+
+      model-viewer {
+        width: 100%; /* Chiều rộng chiếm toàn bộ khung bên trái */
+        height: 100%; /* Chiều cao chiếm toàn bộ khung bên trái */
+        object-fit: contain; /* Đảm bảo hình không bị méo */
+      }
+
+      model-viewer {
+        background-color: #610d0aea;
+        width: 100%;
+        height: 100%;
+      }
+
+    #zoomButton {
+      position: absolute;
+      top: 10px;
+      right: 17px;
+      z-index: 10;
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 1px solid #ddd;
+      border-radius: 50%;
+      padding: 10px;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #zoomButton:hover {
+      background-color: #f0f0f0;
+    }
+
+    #modelContainer.fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 9999;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    model-viewer.fullscreen {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Khung hiển thị model -->
+      <div class="col-md-8 col-12 mb-3" id="modelContainer">
+        <model-viewer id="modelViewer" src="" exposure="2" interaction-prompt="none" camera-controls
+          shadow-intensity="0" shadow-softness="0" auto-rotate tone-mapping="commerce" default-roughness="0.5"
+          alt="Loading model..." camera-orbit="auto 75deg auto" min-camera-orbit="auto 30deg auto"
+          max-camera-orbit="auto 90deg auto" max-field-of-view="60deg"></model-viewer>
+
+        <!-- Nút phóng to -->
+        <button id="zoomButton">
+          <i class="fas fa-expand"></i> <!-- Icon góc vuông -->
+        </button>
+      </div>
+
+      <!-- Khung hiển thị thông tin -->
+      <div class="col-md-4 col-12">
+        <h3 class="text-danger name_vn" id="name_vn">Tên mẫu (VN)</h3>
+        <p class="desc_vn" id="desc_vn">
+          Mô tả mẫu bằng tiếng Việt sẽ hiển thị ở đây.
+        </p>
+        <h3 class="text-danger name_en" id="name_en">Model Name (EN)</h3>
+        <p class="desc_en" id="desc_en">
+          English description of the model will be displayed here.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
+
+      const modelViewer = document.getElementById("modelViewer");
+      const modelContainer = document.getElementById("modelContainer");
+      const zoomButton = document.getElementById("zoomButton");
+      const nameVN = document.getElementById("name_vn");
+      const descVN = document.getElementById("desc_vn");
+      const nameEN = document.getElementById("name_en");
+      const descEN = document.getElementById("desc_en");
+
+      const modelID = getQueryParam("modelID");
+      if (modelID) {
+        fetch("../modelData.json")
+          .then((response) => response.json())
+          .then((modelData) => {
+            if (modelData[modelID]) {
+              const modelInfo = modelData[modelID];
+              modelViewer.src = modelInfo.src;
+              nameVN.textContent = modelInfo.name_vn;
+              descVN.textContent = modelInfo.desc_vn;
+              nameEN.textContent = modelInfo.name_en;
+              descEN.textContent = modelInfo.desc_en;
+            } else {
+              console.error("Model ID not found in data.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error loading model data:", error);
+          });
+      } else {
+        console.error("Model ID not specified.");
+      }
+
+      zoomButton.addEventListener("click", () => {
+        if (!document.fullscreenElement) {
+          modelContainer.requestFullscreen().catch((err) => {
+            console.error("Failed to enter fullscreen:", err);
+          });
+          zoomButton.innerHTML = '<i class="fas fa-compress"></i>';
+        } else {
+          document.exitFullscreen().catch((err) => {
+            console.error("Failed to exit fullscreen:", err);
+          });
+          zoomButton.innerHTML = '<i class="fas fa-expand"></i>';
+        }
+      });
+
+      document.addEventListener("fullscreenchange", () => {
+        if (!document.fullscreenElement) {
+          zoomButton.innerHTML = '<i class="fas fa-expand"></i>';
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
