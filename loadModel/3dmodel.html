@@ -12,24 +12,24 @@
   <style>
     /* Khung chứa model 3D */
     #modelContainer {
-        height: 100vh; /* Chiều cao chiếm toàn màn hình */
-        display: flex;
-        justify-content: center; /* Căn giữa ngang hình 3D */
-        align-items: center; /* Căn giữa dọc hình 3D */
-        overflow: hidden; /* Loại bỏ phần dư thừa nếu có */
-      }
+      height: 100vh; /* Chiều cao chiếm toàn màn hình */
+      display: flex;
+      justify-content: center; /* Căn giữa ngang hình 3D */
+      align-items: center; /* Căn giữa dọc hình 3D */
+      overflow: hidden; /* Loại bỏ phần dư thừa nếu có */
+    }
 
-      model-viewer {
-        width: 100%; /* Chiều rộng chiếm toàn bộ khung bên trái */
-        height: 100%; /* Chiều cao chiếm toàn bộ khung bên trái */
-        object-fit: contain; /* Đảm bảo hình không bị méo */
-      }
+    model-viewer {
+      width: 100%; /* Chiều rộng chiếm toàn bộ khung bên trái */
+      height: 100%; /* Chiều cao chiếm toàn bộ khung bên trái */
+      object-fit: contain; /* Đảm bảo hình không bị méo */
+    }
 
-      model-viewer {
-        background-color: #610d0aea;
-        width: 100%;
-        height: 100%;
-      }
+    model-viewer {
+      background-color: #610d0aea;
+      width: 100%;
+      height: 100%;
+    }
 
     #zoomButton {
       position: absolute;
@@ -67,6 +67,31 @@
     model-viewer.fullscreen {
       width: 100%;
       height: 100%;
+    }
+
+    /* Media query cho điện thoại */
+    @media (max-width: 767px) {
+      #modelContainer {
+        height: 80vh; /* Chiều cao lớn hơn trên điện thoại */
+        width: 100vw; /* Chiều rộng chiếm toàn màn hình trên điện thoại */
+      }
+
+      model-viewer {
+        width: 100%; /* Chiều rộng 100% */
+        height: 100%; /* Chiều cao 100% */
+      }
+
+      .col-12 {
+        width: 100% !important; /* Chiếm toàn bộ chiều rộng màn hình */
+      }
+
+      .col-md-8 {
+        width: 100% !important; /* Khung model chiếm toàn bộ chiều rộng trên điện thoại */
+      }
+
+      .col-md-4 {
+        width: 100% !important; /* Khung thông tin cũng chiếm toàn bộ chiều rộng */
+      }
     }
   </style>
 </head>
@@ -165,3 +190,16 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+

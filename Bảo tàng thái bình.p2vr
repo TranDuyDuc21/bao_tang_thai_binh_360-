@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!-- Pano2VR project file  -->
-<pano2vrconfig version="7.1.5" rev="20954">
+<pano2vrconfig rev="20938" version="7.1.4">
   <tour>
     <panorama>
       <projectsettings>
@@ -8471,8 +8471,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-16.95</pan>
-            <tilt>-3.34</tilt>
+            <pan>-16.34</pan>
+            <tilt>-33.47</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -8487,7 +8487,7 @@
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
           <url>{node13}</url>
-          <skinid>ht_mappin</skinid>
+          <skinid>ht_icon</skinid>
           <type>point</type>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
