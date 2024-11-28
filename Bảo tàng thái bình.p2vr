@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!-- Pano2VR project file  -->
-<pano2vrconfig version="7.1.4" rev="20938">
+<pano2vrconfig rev="20938" version="7.1.4">
   <tour>
     <panorama>
       <projectsettings>
@@ -6355,6 +6355,11 @@
         <customprops/>
         <capturedatetime>2022-08-26T16:38:38</capturedatetime>
         <tags>NHCHNLOGO</tags>
+        <floorplancoordinates>
+          <floorplanid>FloorPlan01</floorplanid>
+          <x>1368</x>
+          <y>488</y>
+        </floorplancoordinates>
       </userdata>
       <floorplans/>
       <hotspots>
