@@ -5437,7 +5437,7 @@
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
           <url>{node47}</url>
-          <skinid>ht_iconll</skinid>
+          <skinid>ht_icon</skinid>
           <type>point</type>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
@@ -5786,7 +5786,7 @@
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
           <url>{node46}</url>
-          <skinid>ht_iconlll</skinid>
+          <skinid>ht_icon</skinid>
           <type>point</type>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
