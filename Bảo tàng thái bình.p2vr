@@ -8696,9 +8696,10 @@
         <id>FloorPlan01</id>
         <floorplanfilename>../Ảnh 360 Bt Thái Bình/1.jpg</floorplanfilename>
         <type>file</type>
-        <lastmodified>2024-11-27T16:47:15</lastmodified>
+        <lastmodified>2024-11-29T17:29:00</lastmodified>
         <floorplannorth>0</floorplannorth>
-        <floorplanoutputbackgroundcolor>#ffffff,0</floorplanoutputbackgroundcolor>
+        <floorplanoutputbackgroundcolor>#aa0000,0</floorplanoutputbackgroundcolor>
+        <floorplanoutputformat>1</floorplanoutputformat>
       </floorplan>
     </floorplans>
     <hotspots/>
